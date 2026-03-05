@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vinayaka Tiffins - Fresh Meals Delivered</title>
+
+    <style>
+        /* =====================================================
+   ROOT VARIABLES
+   ===================================================== */
+:root{
+  --grad-primary: linear-gradient(135deg,#ff512f,#f09819);
+  --grad-secondary: linear-gradient(135deg,#ff6b35,#f7931e);
+  --grad-soft: linear-gradient(180deg,#fff7f0,#ffefe0);
+  --grad-btn: linear-gradient(135deg,#ff6b35,#f7931e);
+
+  --text-dark:#333;
+  --text-light:#eee;
+  --shadow-soft:0 10px 30px rgba(0,0,0,0.08);
+  --shadow-strong:0 20px 50px rgba(255,152,25,0.35);
+}
+
+/* =====================================================
+   GLOBAL RESET
+   ===================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  line-height:1.6;
+  color:var(--text-dark);
+  background:#fffaf6;
+  overflow-x:hidden;
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes scaleIn{
+  from{opacity:0;transform:scale(0.8)}
+  to{opacity:1;transform:scale(1)}
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+@keyframes cartShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+}
+
+/* =====================================================
+   LAYOUT UTILITIES
+   ===================================================== */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:2.4rem;
+  font-weight:900;
+  margin-bottom:28px;
+  background:var(--grad-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:0.6rem 0;
+  background:var(--grad-primary);
+  color:white;
+  box-shadow:0 10px 35px rgba(255,81,47,0.35);
+}
+
+.header-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:8px;
+  font-weight:600;
+}
+
+/* =====================================================
+   CART ICON
+   ===================================================== */
+.cart-icon{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 16px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+  background:rgba(244,119,2,0.25);
+}
+
+.cart-count{
+  background:white;
+  color:#ff6b35;
+  padding:2px 6px;
+  border-radius:50%;
+  font-size:0.8rem;
+}
+
+.cart-shake{ animation:cartShake 0.4s; }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero{
+  height:60vh;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+.bg-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.6);
+  z-index:-2;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.6));
+  z-index:-1;
+}
+
+.hero-content h2{
+  font-size:3rem;
+  animation:fadeInUp 1s;
+}
+
+.hero-content p{
+  font-size:1.2rem;
+  animation:fadeInUp 1.3s;
+}
+
+/* =====================================================
+   MENU
+   ===================================================== */
+.menu-section{
+  padding:50px 20px 80px;
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+.menu-item{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  transition:0.35s;
+}
+
+.menu-item:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 18px 45px rgba(255,152,25,0.35);
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+.add-btn,
+.confirm-order-btn,
+.contact-btn,
+.qty-btn{
+  border:none;
+  cursor:pointer;
+  font-weight:800;
+  color:white;
+  background:var(--grad-btn);
+  box-shadow:0 6px 20px rgba(255,81,47,0.35);
+  transition:0.3s;
+}
+
+.add-btn,
+.qty-btn{
+  border-radius:18px;
+  padding:6px 14px;
+}
+
+.confirm-order-btn,
+.contact-btn{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+}
+
+.add-btn:hover,
+.confirm-order-btn:hover,
+.contact-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* =====================================================
+   MAP
+   ===================================================== */
+.map-frame{
+  width:100%;
+  height:360px;
+  border:0;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+
+/* =====================================================
+   CONTACT
+   ===================================================== */
+.contact-section{
+  padding:40px 20px 80px;
+  background:
+    radial-gradient(circle at top,rgba(255,152,25,0.25),transparent 60%),
+    var(--grad-soft);
+}
+
+.contact-card{
+  background:rgba(255,255,255,0.95);
+  padding:36px;
+  border-radius:22px;
+  box-shadow:var(--shadow-strong);
+}
+
+.contact-title{
+  font-size:1.8rem;
+  font-weight:900;
+  background:var(--grad-secondary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.contact-input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  border-radius:12px;
+  border:1px solid #ddd;
+}
+
+/* =====================================================
+   INTRO SPLASH (FINAL CLEAN)
+   ===================================================== */
+#videoSplash{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at top left,rgba(255,81,47,0.35),transparent 45%),
+    radial-gradient(circle at bottom right,rgba(255,204,51,0.35),transparent 45%),
+    linear-gradient(135deg,#050505,#0f0f18,#050505);
+}
+
+#videoSplash::before,
+#videoSplash::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:0.7;
+}
+
+#videoSplash::before{
+  background:#ff512f;
+  top:-120px;
+  left:-120px;
+}
+
+#videoSplash::after{
+  background:#ffcc33;
+  bottom:-120px;
+  right:-120px;
+}
+
+.video-circle{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  overflow:hidden;
+  border:5px solid #ff6b35;
+  box-shadow:0 0 40px rgba(255,152,25,0.8);
+  position:relative;
+}
+
+.video-circle video,
+#introLogo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.6s;
+}
+
+#introLogo{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:scale(1.4);
+}
+
+.video-circle.morph video{
+  opacity:0;
+  transform:scale(0.7);
+}
+
+.video-circle.morph #introLogo{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+@media(max-width:768px){
+  nav{display:none;}
+}
+
+/* =====================================================
+   CART MODAL
+   ===================================================== */
+.cart-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  justify-content:flex-end;
+  z-index:9999;
+}
+
+.cart-modal.active{
+  display:flex;
+}
+
+/* =====================================================
+   CART PANEL
+   ===================================================== */
+.cart-panel{
+  width:420px;
+  max-width:100%;
+  height:100%;
+  background:white;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:-4px 0 30px rgba(0,0,0,0.25);
+  animation:slideIn 0.3s ease;
+  overflow-y:auto;
+}
+
+@keyframes slideIn{
+  from{transform:translateX(120px);opacity:0}
+  to{transform:translateX(0);opacity:1}
+}
+
+/* =====================================================
+   CART HEADER
+   ===================================================== */
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:12px;
+  border-bottom:2px solid rgba(0,0,0,0.08);
+}
+
+.cart-header h2{
+  font-size:1.4rem;
+  font-weight:900;
+  background:var(--grad-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.cart-close-btn{
+  background:none;
+  border:none;
+  font-size:1.4rem;
+  color:#ff6b35;
+  cursor:pointer;
+}
+
+/* =====================================================
+   CART ITEMS
+   ===================================================== */
+.cart-items{
+  margin-top:18px;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  background:white;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+
+.cart-item-img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.qty-controls{
+  display:flex;
+  gap:10px;
+  margin-top:6px;
+  align-items:center;
+}
+
+/* =====================================================
+   CART FOOTER
+   ===================================================== */
+.cart-footer{
+  margin-top:auto;
+  border-top:2px solid rgba(0,0,0,0.05);
+  padding-top:12px;
+}
+
+.total-line{
+  display:flex;
+  justify-content:space-between;
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+@media(max-width:480px){
+  .cart-panel{
+    width:100%;
+    border-radius:14px 14px 0 0;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+<!-- FIXED INTRO VIDEO -->
+<!-- CIRCULAR VIDEO INTRO -->
+<div id="videoSplash">
+
+  <div class="video-circle">
+    <video id="introVideo" autoplay muted playsinline loop>
+      <source src="file:///D:/Hotel/Images/intro.mp4" type="video/mp4">
+    </video>
+
+    <!-- LOGO (hidden initially) -->
+    <img id="introLogo"
+         src="file:///D:/Hotel/Images/vinayaka.jpeg"
+         alt="Vinayaka Tiffins">
+  </div>
+
+  <h1 class="intro-title">Vinayaka Tiffins</h1>
+  <p class="intro-sub">Fresh • Hot • Home-Style</p>
+
+</div>
+
+
+
+<a href="https://wa.me/917396444654"
+   style="position:fixed;bottom:20px;left:20px;
+          background:#25D366;color:white;
+          padding:14px;border-radius:50%;
+          font-size:22px;z-index:9999;">
+📲
+</a>
+
+
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+
+                <!-- Logo + Name -->
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <img src="D:\Hotel\Images\vinayaka.jpeg"
+                         onerror="this.style.display='none'"
+                         alt="Logo"
+                         style="width:48px;height:48px;border-radius:50%;object-fit:cover;box-shadow:0 3px 12px rgba(0,0,0,0.15);">
+
+                    <div>
+                        <div style="font-weight:800; font-size:1.1rem;">Vinayaka Tiffins</div>
+                        <div style="font-size:0.8rem; opacity:0.9;">Delivered Fresh</div>
+                    </div>
+
+                    <nav style="margin-left:24px;">
+                        <a href="#menuSection">Menu</a>
+                        <a href="#mapsSection">Maps</a>
+                        <a href="#contactSection">Contact</a>
+                    </nav>
+                </div>
+
+                <!-- Cart -->
+                <div class="cart-icon" onclick="openCart()">
+                    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <video autoplay muted loop playsinline class="bg-video">
+            <source src="https://media.istockphoto.com/id/2062853660/video/closeup-shot-of-dosa-cooking-south-indian-dish-with-mashed-potatoes-and-vegetables-on-a-flat.mp4?s=mp4-640x640-is&k=20&c=VZk-peqRrXZ_rEbGuwh7UqJF6raDkDwTBgmljmUFgUc=" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+            <h2>Fresh, Hot & Home-Style</h2>
+            <p>Breakfast served 6:00 AM – 11:00 AM</p>
+            <p style="font-weight:600;">
+            🚚 Free delivery within Mandapeta | ⏱ 20–30 mins
+            </p>
+        </div>
+       </section>
+
+
+    <!-- ================= MENU ================= -->
+    <section id="menuSection" class="menu-section">
+        <h2 class="section-title">✨ Today's Menu ✨</h2>
+        <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+
+    <!-- ================= MAPS ================= -->
+    <section id="mapsSection" style="padding:40px 20px;">
+        <div class="container">
+            <h2 class="section-title" style="font-size:2rem;">Find Us</h2>
+
+            <iframe class="map-frame"
+                src="https://www.google.com/maps?q=16.865866,81.926911&output=embed"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+
+    <!-- ================= PREMIUM CART PANEL ================= -->
+    <div class="cart-modal" id="cartModal">
+
+        <div class="cart-panel">
+
+            <!-- Header -->
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="cart-close-btn" onclick="closeCart()">✖</button>
+            </div>
+
+            <!-- Items -->
+            <div id="cartContent" class="cart-items"></div>
+
+            <!-- Footer -->
+            <div class="cart-footer">
+                <div class="total-line">
+                    <span>Total:</span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+
+                <button id="finalConfirmBtn" class="confirm-order-btn" disabled>
+                    🔒 Pay First to Confirm
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <!-- ================= PAYMENT POPUP ================= -->
+    <div id="paymentPopup"
+         style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55);
+                z-index:12000; justify-content:center; align-items:center;">
+
+        <div style="background:white;padding:22px;border-radius:12px;width:90%;max-width:340px;text-align:center;">
+
+            <h3>Enter Transaction ID</h3>
+            <p style="color:#666;">Enter UTR/Ref no. shown in your UPI app</p>
+            <p style="font-size:0.85rem;color:#555;">
+            ✔ 100% secure UPI payment<br>
+            ✔ Order confirmed after verification
+            </p>
+            <input id="txnInput"
+                   type="text"
+                   placeholder="Ex: 123456789012"
+                   style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:10px;">
+
+            <button onclick="verifyTransaction()"
+                    style="width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,#27ae60,#2ecc71);color:white;font-weight:700;">
+                ✔ Verify Payment
+            </button>
+
+            <button onclick="closePaymentPopup()"
+                    style="width:100%;padding:10px;border:none;border-radius:8px;background:#999;color:white;margin-top:8px;">
+                Cancel
+            </button>
+            
+
+        </div>
+        
+    </div>
+
+
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section id="contactSection" class="contact-section">
+  <div class="container">
+
+    <h2 class="section-title">📞 Contact Us</h2>
+
+    <div style="max-width:720px;margin:0 auto;">
+      <div class="contact-card">
+
+        <h3 class="contact-title">We’d Love to Hear From You</h3>
+        <p class="contact-sub">
+          Questions, feedback or suggestions? Send us a message 👇
+        </p>
+
+        <form id="contactForm">
+
+          <input id="c_name"
+                 class="contact-input"
+                 type="text"
+                 placeholder="Your Name"
+                 required>
+
+          <input id="c_phone"
+                 class="contact-input"
+                 type="tel"
+                 placeholder="Phone Number (optional)">
+
+          <textarea id="c_message"
+                    class="contact-input"
+                    placeholder="Your Message"
+                    required
+                    style="min-height:120px;"></textarea>
+
+          <button type="submit" class="contact-btn">
+            ✉️ Send Message
+          </button>
+
+        </form>
+
+        <div class="contact-info">
+          <span>📍 Mandapeta, Andhra Pradesh</span>
+          <span>📞 +91 73964 44654</span>
+          <span>⏰ 6:00 AM – 11:00 AM</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- ================= BOTTOM NAV (MOBILE) ================= -->
+    <div class="bottom-nav">
+        <a href="#menuSection">🍽️<br>Menu</a>
+        <a href="#mapsSection">📍<br>Maps</a>
+        <a href="#contactSection">📞<br>Contact</a>
+    </div>
+<script>
+/***********************************************
+ * Data & State
+ ***********************************************/
+
+
+const menuItems = [
+  { id: 1, name: "Idly",image :"D:/Hotel/Images/Idly.jpeg", description: "4 Pieces served with chutneys", price: 25, type: "veg" },
+  { id: 2, name: "Mysore Bonda",image:"D:/Hotel/Images/Bonda.jpeg", description: "4 Pieces crispy bondas", price: 25, type: "veg" },
+  { id: 3, name: "Plain Dosa", image:"D:/Hotel/Images/Plain Dosa.jpeg", description: "Crispy dosa with chutneys", price: 35, type: "veg" },
+  { id: 4, name: "Onion Dosa", image:"D:/Hotel/Images/Onion Dosa.jpeg" ,description: "Dosa topped with fresh onions", price: 35, type: "veg" },
+  { id: 5, name: "Upma Dosa", image:"D:/Hotel/Images/Upma Dosa.jpeg", description: "Dosa stuffed with soft upma", price: 40, type: "veg" },
+  { id: 6, name: "Uthappam", image:"D:/Hotel/Images/Uthappam.jpeg", description: "Onion + chilli uthappam", price: 25, type: "veg" },
+  { id: 7, name: "Pesarattu", image:"D:/Hotel/Images/Pesarattu.jpeg", description: "Green moong dosa", price: 35, type: "veg" },
+  { id: 8, name: "Upma Pesarattu", image:"D:/Hotel/Images/Upma Pesarattu.jpeg", description: "Pesarattu filled with upma", price: 40, type: "veg" },
+  { id: 9, name: "Vada", image:"D:/Hotel/Images/Vada.jpeg", description: "2 crispy vadas", price: 25, type: "veg" },
+  { id:10, name: "Puri",image:"D:/Hotel/Images/puri.jpeg", description: "2 puris with curry", price: 25, type: "veg" },
+  { id:11, name: "Punugulu",image:"D:/Hotel/Images/Punugulu.jpeg", description: "4 crispy punugulu", price: 25, type: "veg" },
+  { id:12, name: "Upma",image:"D:/Hotel/Images/Upma.jpeg",description: "Hot soft upma", price: 25, type: "veg" },
+];
+
+let cart = [];
+let verifiedTxn = null; // filled after verifying payment
+
+/***********************************************
+ * Utility
+ ***********************************************/
+function formatINR(v){ return "₹" + Number(v).toFixed(0); }
+
+/***********************************************
+ * Render Menu
+ ***********************************************/
+function renderMenu() {
+  const grid = document.getElementById("menuGrid");
+
+  grid.innerHTML = menuItems.map((item, idx) => `
+    <div class="menu-item" style="animation-delay:${idx * 0.03}s">
+
+      <!-- IMAGE -->
+      <img
+        src="${item.image || 'https://source.unsplash.com/400x300/?south-indian,food'}"
+        alt="${item.name}"
+        style="width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:10px;"
+      >
+
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+        <h3>${item.name}</h3>
+        ${item.id === 10 ? '<span style="color:green;font-weight:700;">🔥 Bestseller</span>' : ''}
+      </div>
+
+      <p style="color:#666">${item.description}</p>
+
+      <div style="display:flex;justify-content:space-between;margin-top:12px;">
+        <strong>${formatINR(item.price)}</strong>
+        <button class="add-btn" onclick="addToCart(${item.id})">Add</button>
+      </div>
+
+    </div>
+  `).join("");
+}
+
+
+/***********************************************
+ * Cart Functions
+ ***********************************************/
+function updateCartCount(){
+  document.getElementById("cartCount").textContent =
+    cart.reduce((s,i)=> s + i.quantity, 0);
+}
+
+function addToCart(id){
+  const item = menuItems.find(m => m.id === id);
+  const found = cart.find(c => c.id === id);
+
+  if(found) found.quantity++;
+  else cart.push({...item, quantity:1});
+
+  updateCartCount();
+  renderCart();
+  animateCartSpark();
+}
+
+function increaseQuantity(i){
+  cart[i].quantity++;
+  updateCartCount();
+  renderCart();
+}
+
+function decreaseQuantity(i){
+  if(cart[i].quantity > 1) cart[i].quantity--;
+  else cart.splice(i,1);
+
+  updateCartCount();
+  renderCart();
+}
+
+function openCart(){
+  renderCart();
+  document.getElementById("cartModal").classList.add("active");
+}
+function closeCart(){
+  document.getElementById("cartModal").classList.remove("active");
+}
+
+
+
+/***********************************************
+ * RENDER CART - NEW PREMIUM UI
+ ***********************************************/
+function renderCart() {
+  const box  = document.getElementById("cartContent");
+  const totalBox = document.getElementById("cartTotal");
+  const confirmBtn = document.getElementById("finalConfirmBtn");
+
+  if(cart.length === 0){
+    box.innerHTML = `<div style="text-align:center;color:#666;padding:30px;">Cart is empty 🛒</div>`;
+    totalBox.textContent = "₹0";
+    confirmBtn.disabled = true;
+    return;
+  }
+
+  const total = cart.reduce((s,i) => s + i.price*i.quantity, 0);
+  totalBox.textContent = formatINR(total);
+
+  const upiLink = `upi://pay?pa=veeravarapumanikanta@oksbi&pn=Vinayaka%20Tiffins&am=${total}&cu=INR`;
+  const qrImage = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiLink)}&size=230x230`;
+
+  box.innerHTML =
+    cart.map((item,i)=>`
+      <div class="cart-item">
+          <img class="cart-item-img" src="${item.image}">
+          <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${formatINR(item.price)} each</div>
+
+              <div class="qty-controls">
+                  <button class="qty-btn" onclick="decreaseQuantity(${i})">−</button>
+                  <div class="qty-number">${item.quantity}</div>
+                  <button class="qty-btn" onclick="increaseQuantity(${i})">+</button>
+              </div>
+          </div>
+      </div>
+    `).join("") + `
+      <div style="text-align:center;margin-top:10px;">
+          <img src="${qrImage}" width="200" style="border-radius:10px;">
+          <a href="${upiLink}"
+             style="display:block;margin-top:6px;color:#ff6b35;font-weight:700;text-decoration:none;">
+             💳 Pay ${formatINR(total)}
+          </a>
+          <button onclick="openPaymentPopup()" 
+                  style="margin-top:10px;padding:10px;width:100%;border:none;border-radius:8px;background:#222;color:white;font-weight:700;">
+            Enter Transaction ID
+          </button>
+      </div>
+    `;
+
+  if(verifiedTxn){
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "✅ Confirm Order";
+  } else {
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "🔒 Pay First to Confirm";
+  }
+
+ confirmBtn.onclick = () => {
+  if(!verifiedTxn){
+    openPaymentPopup();
+  }else{
+    finalizeOrder();
+  }
+}
+}
+
+/***********************************************
+ * Payment Popup
+ ***********************************************/
+function openPaymentPopup(){
+  document.getElementById("paymentPopup").style.display = "flex";
+}
+function closePaymentPopup(){
+  document.getElementById("paymentPopup").style.display = "none";
+}
+
+function verifyTransaction(){
+  const txn = document.getElementById("txnInput").value.trim();
+  if(txn.length < 6){
+    alert("Invalid Transaction ID");
+    return;
+  }
+
+  verifiedTxn = txn;
+  closePaymentPopup();
+  renderCart();
+  alert("✔ Payment Verified! Now confirm your order.");
+}
+
+/***********************************************
+ * Final Order Confirmation
+ ***********************************************/
+function finalizeOrder(){
+  if(!verifiedTxn){
+    alert("Please verify payment first.");
+    return;
+  }
+
+  const name = prompt("Enter your name:");
+  if(!name) return alert("Name required");
+
+  const phone = prompt("Enter phone (10 digits):");
+  if(!/^[0-9]{10}$/.test(phone)) return alert("Invalid phone number");
+
+  const address = prompt("Enter delivery address:");
+  if(!address) return alert("Address required");
+
+  const time = prompt("Preferred delivery time (HH:MM):");
+  if(!time) return alert("Time required");
+
+  const total = cart.reduce((s,i)=> s + i.price*i.quantity, 0);
+  const orderId = "ORD-" + Date.now();
+
+  const orderData = {
+    id: orderId,
+    name, phone, address, time,
+    total,
+    items: cart,
+    transaction_id: verifiedTxn,
+    created_at: new Date().toISOString(),
+    status: "Pending Verification"
+  };
+
+  document.getElementById("cartContent").innerHTML = `
+      <div style="text-align:center;padding:30px;">
+          <div style="width:60px;height:60px;margin:auto;border-radius:50%;
+                       border:6px solid #eee;border-top:6px solid #ff6b35;
+                       animation:spin 1s linear infinite;"></div>
+          <h3>Verifying Payment...</h3>
+          <p>This takes 25 seconds.</p>
+      </div>
+  `;
+
+  // Save locally for tracking
+  let stored = JSON.parse(localStorage.getItem("orders_vinayaka") || "[]");
+  stored.push(orderData);
+  localStorage.setItem("orders_vinayaka", JSON.stringify(stored));
+
+  // Simulated 25 sec delay
+  setTimeout(()=>{
+
+    // Update to Confirmed
+    stored = stored.map(o => 
+      o.id === orderId ? {...o, status:"Confirmed"} : o
+    );
+    localStorage.setItem("orders_vinayaka", JSON.stringify(stored));
+
+
+    // Show Success
+    document.getElementById("cartContent").innerHTML = `
+  <div class="success-box">
+    <div class="checkmark">✔</div>
+    <h2>Order Confirmed!</h2>
+    <p style="opacity:0.8;">Thank you for ordering ❤️</p>
+
+    <div style="margin:14px 0;">
+      <strong>Order ID:</strong>
+      <div style="font-size:1.1rem;font-weight:800;">${orderId}</div>
+    </div>
+
+    <p>Total Paid: <strong>${formatINR(total)}</strong></p>
+
+    <button onclick="closeCart()"
+      class="confirm-order-btn"
+      style="margin-top:16px;">
+      Close
+    </button>
+  </div>
+`;
+
+
+    cart = [];
+    verifiedTxn = null;
+    updateCartCount();
+
+  }, 25000);
+}
+
+
+/***********************************************
+ * Contact Form
+ ***********************************************/
+document.getElementById("contactForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  alert("📩 Message sent! We will contact you soon.");
+  e.target.reset();
+});
+
+/***********************************************
+ * Init
+ ***********************************************/
+document.addEventListener("DOMContentLoaded", () => {
+  renderMenu();
+  updateCartCount();
+});
+
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+  localStorage.setItem(
+    "dark_mode",
+    document.body.classList.contains("dark")
+  );
+}
+
+/* Persist mode */
+if(localStorage.getItem("dark_mode") === "true"){
+  document.body.classList.add("dark");
+}
+function animateCartSpark(){
+  const el = document.querySelector('.cart-icon');
+
+  el.classList.add("cart-shake");
+  setTimeout(()=>el.classList.remove("cart-shake"),400);
+
+  const sparkle = document.createElement("span");
+  sparkle.textContent = "✨";
+  sparkle.style.position = "fixed";
+  sparkle.style.right = "90px";
+  sparkle.style.top = "20px";
+  sparkle.style.fontSize = "18px";
+  sparkle.style.transition = "all .6s ease";
+  sparkle.style.zIndex = "99999";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(()=>{
+    sparkle.style.transform="translateY(-30px)";
+    sparkle.style.opacity="0";
+  },50);
+
+  setTimeout(()=>sparkle.remove(),600);
+}
+
+
+
+const video  = document.getElementById("introVideo");
+const circle = document.querySelector(".video-circle");
+const splash = document.getElementById("videoSplash");
+
+const INTRO_TIME = 1; // seconds
+
+video.addEventListener("loadeddata", () => {
+  setTimeout(() => {
+    circle.classList.add("morph");
+
+    setTimeout(() => {
+      splash.style.opacity = "0";
+      setTimeout(() => splash.remove(), 600);
+    }, 900);
+
+  }, INTRO_TIME * 1000);
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
